@@ -15,8 +15,8 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
       templateUrl: '/views/templates/register.html',
       controller: 'LoginController as vm'
     })
-    .when('/user', {
-      templateUrl: '/views/templates/user.html',
+    .when('/drinks', {
+      templateUrl: '/views/templates/drinks.html',
       controller: 'UserController as vm',
       resolve: {
         getuser : function(UserService){
@@ -24,9 +24,9 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
         }
       }
     })
-    .when('/info', {
-      templateUrl: '/views/templates/info.html',
-      controller: 'InfoController as vm',
+    .when('/add-drink', {
+      templateUrl: '/views/templates/add-drink.html',
+      controller: 'AddController as vm',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();

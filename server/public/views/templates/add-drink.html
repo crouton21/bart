@@ -1,0 +1,28 @@
+<div ng-controller="UserController as vm" ng-include="'views/partials/nav.html'"></div>
+<br>
+<div class="container">
+  <p>Drink Name</p>
+  <input type="text" placeholder="Drink Name">
+  <p>Ingredients</p>
+  <input type="text" placeholder="Ingredient">
+  <input type="number" placeholder="Quantity">
+  <button>+</button>
+  <p>Glass</p>
+  <select>
+    <option value="rocks">rocks</option>
+    <option value="coupe">coupe</option>
+  </select>
+  <p>Ice</p>
+  <select>
+    <option value="rocks">crushed</option>
+    <option value="coupe">cube</option>
+    <option value="coupe">large cube</option>
+    <option value="coupe">none</option>
+  </select>
+  <br>
+  <p>Garnish</p>
+  <input type="text" placeholder="Garnish">
+  <br>
+  <br>
+  <button>Save Drink</button>
+</div>

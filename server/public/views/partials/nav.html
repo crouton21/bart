@@ -1,8 +1,11 @@
 <div class="navbar">
   <div class="container">
     <ul>
-      <li><a href="#!user">User Home</a></li>
-      <li><a href="#!info">Info Page</a></li>
+      <li><h1>cheers, {{vm.userObject.userName}}!</h1></li>
+      <li><a href="#!drinks">Drinks</a></li>
+      <li><a href="#!add-drink">Add Drink</a></li>
+      <li><a href="#!home" ng-click="vm.userService.logout()">log Out</li>
     </ul>
+    
   </div>
 </div>
