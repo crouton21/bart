@@ -1,4 +1,4 @@
-myApp.controller('DrinkController', ['UserService', '$http', function(UserService, $http) {
+myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', function(UserService, $http, $routeParams) {
   const self = this;
   
   self.userService = UserService;
@@ -12,6 +12,8 @@ myApp.controller('DrinkController', ['UserService', '$http', function(UserServic
     self.newDrink.ingredients.push(newIngredient);
     self.newIngredient = {};
   }
+
+  self.drinkDisplay = [];
 
   self.glassInputs = [];
   self.iceInputs = [];
@@ -30,6 +32,19 @@ myApp.controller('DrinkController', ['UserService', '$http', function(UserServic
     })
   }
 
+  self.getDrinks = function(id){
+    $http({
+      method: 'GET',
+      url: `/drinks/${id}`
+    }).then(function(res){
+      self.drinkDisplay = res.data;
+    }).catch(function(error){
+      console.log('error on getting drinks', error);
+    })
+  }
+
+  self.getDrinks(self.userObject.userId);
+
   self.getInputs = function(){
     $http({
       method: 'GET',
@@ -37,9 +52,6 @@ myApp.controller('DrinkController', ['UserService', '$http', function(UserServic
     }).then(function(res){
       self.glassInputs = res.data[0].rows;
       self.iceInputs = res.data[1].rows;
-      console.log(self.glassInputs);
-      console.log(self.iceInputs);
-      
     }).catch(function(error){
       console.log('error on getting inputs', error);
     })

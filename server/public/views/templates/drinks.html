@@ -1,4 +1,7 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
-    <p>Drinks!</p>
+<div ng-controller="DrinkController as vm" class="container">
+    <h2>Drinks!</h2>
+    <div ng-repeat="drink in vm.drinkDisplay">
+        <a ng-href="#!/drinks/{{drink.recipe_id}}">{{drink.recipe_name}}</a>
+    </div>
 </div>

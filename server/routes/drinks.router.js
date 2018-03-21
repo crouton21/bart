@@ -22,4 +22,16 @@ router.get('/inputs', function(req, res){
             });
 });
 
+router.get('/:id', function(req, res){
+    const id = req.params.id;
+    const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes WHERE recipes.user_id = $1`;
+    pool.query(queryText, [id])
+        .then(function(result){
+            res.send(result.rows);
+        })
+        .catch(function(error){
+            res.sendStatus(500);
+        })
+})
+
 module.exports = router;

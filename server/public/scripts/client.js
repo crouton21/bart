@@ -33,6 +33,10 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
         }
       }
     })
+    .when('/drinks/:id', {
+      templateUrl: '/views/templates/drink-recipe.html',
+      controller: 'UserController as vm'
+    })
     .otherwise({
       template: '<h1>404</h1>'
     });
