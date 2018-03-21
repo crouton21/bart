@@ -1,7 +1,8 @@
 <div ng-controller="UserController as vm" ng-include="'views/partials/nav.html'"></div>
 <br>
 <div class="container">
-  <p>Drink Name: 
+  <p>
+    Drink Name: 
     <input type="text" ng-model="vm.newDrink.name">
   </p>
   <p>
@@ -17,31 +18,15 @@
     Glass: 
     <select ng-model="vm.newDrink.glass">
         <option value="" disabled selected></option>
-        <option value="collins">collins</option>
-        <option value="copper mug">copper mug</option>
-        <option value="cordial">cordial</option>
-        <option value="coupe">coupe</option>
-        <option value="flute">flute</option>
-        <option value="highball">highball</option>
-        <option value="martini">martini</option>
-        <option value="nick and nora">nick &amp; nora</option>
-        <option value="rocks">rocks</option>
-        <option value="shot">shot</option>
-        <option value="snifter">snifter</option>
+        <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name}}</option>
     </select>
   </p>
   <p>
     Ice:  
-      <select ng-model="vm.newDrink.ice">
-          <option value="" disabled selected></option>
-          <option value="collins spear">collins spear</option>
-          <option value="crushed">crushed</option>
-          <option value="cube">cube</option>
-          <option value="cube (large)">cube (large)</option>
-          <option value="rocks">rocks</option>
-          <option value="sphere">sphere</option>
-          <option value="none">none</option>
-        </select>
+    <select ng-model="vm.newDrink.ice">
+        <option value="" disabled selected></option>
+        <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name}}</option>
+    </select>
   </p>
   <p>
     Garnish: 
