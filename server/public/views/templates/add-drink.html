@@ -1,30 +1,61 @@
 <div ng-controller="UserController as vm" ng-include="'views/partials/nav.html'"></div>
 <br>
 <div class="container">
-  <p>Drink Name</p>
-  <input type="text" placeholder="Drink Name">
-  <p>Ingredients</p>
-  <input type="text" placeholder="Ingredient">
-  <input type="number" placeholder="Quantity">
-  <button>+</button>
-  <p>Glass</p>
-  <select>
-    <option value="rocks">rocks</option>
-    <option value="coupe">coupe</option>
-  </select>
-  <p>Ice</p>
-  <select>
-    <option value="rocks">crushed</option>
-    <option value="coupe">cube</option>
-    <option value="coupe">large cube</option>
-    <option value="coupe">none</option>
-  </select>
+  <p>Drink Name: 
+    <input type="text" ng-model="vm.newDrink.name">
+  </p>
+  <p>
+    Ingredients: 
+      <input type="number" placeholder="Quantity" ng-model="vm.newIngredient.quantity">
+      <input type="text" placeholder="Ingredient" ng-model="vm.newIngredient.name">
+      <button ng-click="vm.addIngredient(vm.newIngredient)">+</button>
+  </p>
+  <p ng-repeat="ingredient in vm.newDrink.ingredients">
+    {{ingredient.quantity}} {{ingredient.name}}
+  </p>
+  <p>
+    Glass: 
+    <select ng-model="vm.newDrink.glass">
+        <option value="" disabled selected></option>
+        <option value="collins">collins</option>
+        <option value="copper mug">copper mug</option>
+        <option value="cordial">cordial</option>
+        <option value="coupe">coupe</option>
+        <option value="flute">flute</option>
+        <option value="highball">highball</option>
+        <option value="martini">martini</option>
+        <option value="nick and nora">nick &amp; nora</option>
+        <option value="rocks">rocks</option>
+        <option value="shot">shot</option>
+        <option value="snifter">snifter</option>
+    </select>
+  </p>
+  <p>
+    Ice:  
+      <select ng-model="vm.newDrink.ice">
+          <option value="" disabled selected></option>
+          <option value="collins spear">collins spear</option>
+          <option value="crushed">crushed</option>
+          <option value="cube">cube</option>
+          <option value="cube (large)">cube (large)</option>
+          <option value="rocks">rocks</option>
+          <option value="sphere">sphere</option>
+          <option value="none">none</option>
+        </select>
+  </p>
+  <p>
+    Garnish: 
+    <input type="text" ng-model="vm.newDrink.garnish">
+  </p>
+  <p>
+    Notes: 
+    <input type="text" ng-model="vm.newDrink.notes">
+  </p>
+  <p>
+    Search tags: 
+    <tags-input ng-model="vm.newDrink.tags"></tags-input>
+  </p>
+  <button ng-click="vm.saveDrink()">Save Drink</button>
   <br>
-  <p>Garnish</p>
-  <input type="text" placeholder="Garnish">
   <br>
-  <br>
-  <tags-input ng-model="tags"></tags-input>
-    <p>Model: {{tags}}</p>
-  <button>Save Drink</button>
 </div>

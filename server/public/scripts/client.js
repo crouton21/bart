@@ -2,7 +2,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngTagsInput']);
 
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  console.log('myApp -- config')
+
   $routeProvider
     .when('/', {
       redirectTo: 'home'
@@ -26,7 +26,7 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     })
     .when('/add-drink', {
       templateUrl: '/views/templates/add-drink.html',
-      controller: 'AddController as vm',
+      controller: 'DrinkController as vm',
       resolve: {
         getuser : function(UserService){
           return UserService.getuser();

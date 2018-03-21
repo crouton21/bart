@@ -1,6 +1,6 @@
 const express = require('express');
 const encryptLib = require('../modules/encryption');
-const Person = require('../models/Person');
+// const Person = require('../models/Person');
 const userStrategy = require('../strategies/sql.localstrategy');
 const pool = require('../modules/pool.js');
 const router = express.Router();
@@ -28,7 +28,7 @@ router.post('/register', (req, res, next) => {
     username: req.body.username,
     password: encryptLib.encryptPassword(req.body.password)
   };
-  console.log('new user:', saveUser);
+  // console.log('new user:', saveUser);
   pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
     [saveUser.username, saveUser.password], (err, result) => {
       if (err) {
