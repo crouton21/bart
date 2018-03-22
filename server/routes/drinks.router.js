@@ -28,10 +28,6 @@ router.post('/', function(req, res){
             await client.query(insertIngredientsText, insertIngredientsValues)
         }
           
-        const insertTagsText = 'INSERT INTO "tags" ("tag_name", "recipe_id") VALUES ($1, $2)';
-        const insertTagsValues = [newDrink.tags[0].text, rows[0].recipe_id];
-
-        await client.query(insertTagsText, insertTagsValues)
         await client.query('COMMIT')
         } 
         catch (e) {
@@ -78,7 +74,6 @@ router.get('/recipe/:id', function(req, res){
     const queryText = `SELECT * FROM recipes
             JOIN glasses ON recipes.glass_id = glasses.glass_id
             JOIN ice ON recipes.ice_id = ice.ice_id
-            JOIN tags ON recipes.recipe_id = tags.recipe_id
             JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id
             WHERE recipes.recipe_id = $1`;
     pool.query(queryText, [id])
