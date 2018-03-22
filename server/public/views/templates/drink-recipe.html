@@ -8,6 +8,6 @@
     <p>Ice: {{vm.drinkRecipe.ice_name}}</p>
     <p>Garnish: {{vm.drinkRecipe.garnish}}</p>
     <button>Edit Drink</button>
-    <button>Delete Drink</button>
+    <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
     
 </div>

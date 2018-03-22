@@ -62,8 +62,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
     }).then(function(res){
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
-      console.log(res);
-      
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })
@@ -86,5 +84,29 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
   }
 
   self.getInputs();
+
+  self.deleteDrink = function(id){
+    $http({
+      method: 'DELETE',
+      url: `/drinks/${id}`
+    }).then(function(res){
+      self.getDrinks();
+    }).catch(function(error){
+      console.log('error deleting drink', error);
+    })
+  }
+
+  self.confirmDelete = function(id){
+    let deleteThisDrink = confirm('Are you sure you want to delete this drink?');
+    deleteThisDrink;
+    if (deleteThisDrink == true){
+        self.deleteDrink(id);
+    }
+    else {
+        console.log('not deleted');
+    }
+} // end confirmDelete
+
+
 
 }]);
