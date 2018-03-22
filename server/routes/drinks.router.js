@@ -24,7 +24,8 @@ router.get('/inputs', function(req, res){
 
 router.get('/:id', function(req, res){
     const id = req.params.id;
-    const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes WHERE recipes.user_id = $1`;
+    const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes 
+            WHERE recipes.user_id = $1`;
     pool.query(queryText, [id])
         .then(function(result){
             res.send(result.rows);
@@ -33,5 +34,22 @@ router.get('/:id', function(req, res){
             res.sendStatus(500);
         })
 })
+
+router.get('/recipe/:id', function(req, res){
+    const id = req.params.id;
+    const queryText = `SELECT * FROM recipes
+            JOIN glasses ON recipes.glass_id = glasses.glass_id
+            JOIN ice ON recipes.ice_id = ice.ice_id
+            JOIN tags ON recipes.recipe_id = tags.recipe_id
+            JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id
+            WHERE recipes.recipe_id = $1`;
+    pool.query(queryText, [id])
+        .then(function(result){
+            res.send(result.rows);
+        })
+        .catch(function(error){
+            res.sendStatus(500);
+        })
+});
 
 module.exports = router;

@@ -1,5 +1,11 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
-    <h2>Drink page!</h2>
+    <h2>{{vm.drinkRecipe.recipe_name}}</h2>
+    <div ng-repeat="ingredient in vm.drinkIngredients">
+        {{ingredient.quantity}} {{ingredient.name}}
+    </div>
+    <p>Glass: {{vm.drinkRecipe.glass_name}}</p>
+    <p>Ice: {{vm.drinkRecipe.ice_name}}</p>
+    <p>Garnish: {{vm.drinkRecipe.garnish}}</p>
     
 </div>
