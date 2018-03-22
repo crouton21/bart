@@ -8,29 +8,33 @@ router.post('/', function(req, res){
     res.sendStatus(200);
 
     (async () => {
-        // note: we don't try/catch this because if connecting throws an exception
-        // we don't need to dispose of the client (it will be undefined)
+
         const client = await pool.connect()
       
         try {
-          await client.query('BEGIN')
+        await client.query('BEGIN')
 
-          const { rows } = await client.query(`INSERT INTO "recipes" ("recipe_name", "garnish", "notes", "glass_id", "ice_id", "user_id") 
+        const { rows } = await client.query(`INSERT INTO "recipes" ("recipe_name", "garnish", "notes", "glass_id", "ice_id", "user_id") 
                 VALUES ($1, $2, $3, $4, $5, $6) RETURNING recipe_id`, [newDrink.name, newDrink.garnish, newDrink.notes, newDrink.glass, newDrink.ice, newDrink.userId])
+        
+        for (ingredient of newDrink.ingredients){
+            let insertIngredientsText = 'INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)';
+            let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
 
-          const insertIngredientsText = 'INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)';
-          const insertIngredientsValues = [newDrink.ingredients[0].name, newDrink.ingredients[0].quantity, rows[0].recipe_id];
+            await client.query(insertIngredientsText, insertIngredientsValues)
+        }
+          
+        const insertTagsText = 'INSERT INTO "tags" ("tag_name", "recipe_id") VALUES ($1, $2)';
+        const insertTagsValues = [newDrink.tags[0].text, rows[0].recipe_id];
 
-          const insertTagsText = 'INSERT INTO "tags" ("tag_name", "recipe_id") VALUES ($1, $2)';
-          const insertTagsValues = [newDrink.tags[0].text, rows[0].recipe_id];
-
-          await client.query(insertIngredientsText, insertIngredientsValues)
-          await client.query(insertTagsText, insertTagsValues)
-          await client.query('COMMIT')
-        } catch (e) {
+        await client.query(insertTagsText, insertTagsValues)
+        await client.query('COMMIT')
+        } 
+        catch (e) {
           await client.query('ROLLBACK')
           throw e
-        } finally {
+        } 
+        finally {
           client.release()
         }
       })().catch(e => console.error(e.stack))
