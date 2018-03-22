@@ -62,6 +62,8 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
     }).then(function(res){
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
+      console.log(res);
+      
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })
