@@ -7,6 +7,31 @@ router.post('/', function(req, res){
     const queryText = ``
     console.log(newDrink);
     res.sendStatus(200);
+
+    (async () => {
+        // note: we don't try/catch this because if connecting throws an exception
+        // we don't need to dispose of the client (it will be undefined)
+        const client = await pool.connect()
+      
+        try {
+          await client.query('BEGIN')
+          const { rows } = await client.query(`INSERT INTO "recipes" ("recipe_name", "garnish", "notes", "glass_id", "ice_id", "user_id") 
+                VALUES ($1, $2, $3, $4, $5, $6) RETURNING recipe_id`, ['lemonade', 'mint', 'minty', 1, 4, 2])
+            console.log(rows);
+          const insertText = 'INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)'
+          const insertValues = ["lemon", "1", rows[0].recipe_id]
+          await client.query(insertText, insertValues)
+          await client.query('COMMIT')
+        } catch (e) {
+          await client.query('ROLLBACK')
+          throw e
+        } finally {
+          client.release()
+        }
+      })().catch(e => console.error(e.stack))
+
+
+
 })
 
 router.get('/inputs', function(req, res){
