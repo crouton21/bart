@@ -53,8 +53,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
     for (ingredient of recipe){
       self.drinkIngredients.push({ name: ingredient.ingredient_name, quantity: ingredient.ingredient_quantity})
     }
-    console.log(self.drinkIngredients);
-    
   }
 
   self.getDrinkRecipe = function(id){
@@ -62,7 +60,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
       method: 'GET',
       url: `/drinks/recipe/${id}`
     }).then(function(res){
-      console.log(res.data);
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
     }).catch(function(error){
