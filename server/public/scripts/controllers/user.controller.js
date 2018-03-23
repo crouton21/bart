@@ -4,5 +4,4 @@ myApp.controller('UserController', ['UserService', function(UserService) {
   self.userService = UserService;
   self.userObject = UserService.userObject;
   
-  
 }]);

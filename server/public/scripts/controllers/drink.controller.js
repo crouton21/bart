@@ -2,8 +2,9 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
   const self = this;
   
   self.userService = UserService;
+  self.getuser = UserService.getuser;
   self.userObject = UserService.userObject;
-
+  
   self.newDrink = { ingredients: [], userId: self.userObject.userId}
   
   self.newIngredient = {};
@@ -105,8 +106,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
     else {
         console.log('not deleted');
     }
-} // end confirmDelete
-
+  } 
 
 
 }]);
