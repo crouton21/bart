@@ -23,21 +23,15 @@
                 <button ng-click="vm.addIngredient(vm.drinkIngredients)">+</button>
         </p>
         <p ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity}} {{ingredient.name}}
+            {{ingredient.quantity}} {{ingredient.name}} <button>-</button>
         </p>
         <p>
             Glass: 
-            <select ng-model="vm.drinkRecipe.glass_name">
-                <option value="" disabled selected></option>
-                <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name}}</option>
-            </select>
+            <select ng-model="vm.drinkRecipe.glass_name" ng-options="glass as glass.glass_name for glass in vm.glassInputs"></select>
         </p>
         <p>
             Ice:  
-            <select ng-model="vm.drinkRecipe.ice_name">
-                <option value="" disabled selected></option>
-                <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name}}</option>
-            </select>
+            <select ng-model="vm.drinkRecipe.ice_name" ng-options="ice as ice.ice_name for ice in vm.iceInputs"></select> 
         </p>
         <p>
             Garnish: 

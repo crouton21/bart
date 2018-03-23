@@ -12,7 +12,7 @@
       <button ng-click="vm.addIngredient(vm.newIngredient)">+</button>
   </p>
   <p ng-repeat="ingredient in vm.newDrink.ingredients">
-    {{ingredient.quantity}} {{ingredient.name}}
+    {{ingredient.quantity}} {{ingredient.name}} <button ng-click="removeIngredient">-</button>
   </p>
   <p>
     Glass: 
