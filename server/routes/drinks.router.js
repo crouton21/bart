@@ -14,7 +14,7 @@ router.post('/', function(req, res){
         await client.query('BEGIN')
         const { rows } = await client.query("INSERT INTO recipes (recipe_name, garnish, notes, glass_id, ice_id, user_id, tags) VALUES ($1, $2, $3, $4, $5, $6, ARRAY ["+array_to_send+"]) RETURNING recipe_id", [newDrink.name, newDrink.garnish, newDrink.notes, newDrink.glass, newDrink.ice, newDrink.userId])
         for (ingredient of newDrink.ingredients){
-            let insertIngredientsText = 'INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)';
+            let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
             let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
             await client.query(insertIngredientsText, insertIngredientsValues)
         }  
@@ -48,7 +48,9 @@ router.get('/:id', function(req, res){
     const id = req.params.id;
     const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes 
             WHERE recipes.user_id = $1`;
-    pool.query(queryText, [id])
+            console.log(req.user, 'this is the user auth');
+            
+    pool.query(queryText, [req.user.id])
         .then(function(result){
             res.send(result.rows);
         })

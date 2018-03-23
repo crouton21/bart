@@ -43,11 +43,14 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
       url: `/drinks/${id}`
     }).then(function(res){
       self.drinkDisplay = res.data;
+      console.log('got drinks for id', id);
+      
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })
   }
 
+  self.getuser();
   self.getDrinks(self.userObject.userId);
 
   self.formatIngredients = function(recipe){
@@ -63,6 +66,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
     }).then(function(res){
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
+      console.log(res.data);
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })
