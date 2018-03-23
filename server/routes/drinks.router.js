@@ -74,8 +74,6 @@ router.get('/:id', function(req, res){
     const id = req.params.id;
     const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes 
             WHERE recipes.user_id = $1`;
-            console.log(req.user, 'this is the user auth');
-            
     pool.query(queryText, [req.user.id])
         .then(function(result){
             res.send(result.rows);

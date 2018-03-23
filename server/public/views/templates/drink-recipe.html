@@ -1,13 +1,58 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
-    <h2>{{vm.drinkRecipe.recipe_name}}</h2>
-    <div ng-repeat="ingredient in vm.drinkIngredients">
-        {{ingredient.quantity}} {{ingredient.name}}
+    <div ng-hide="editing==true">
+         <h2>{{vm.drinkRecipe.recipe_name}}</h2>
+        <div ng-repeat="ingredient in vm.drinkIngredients">
+            {{ingredient.quantity}} {{ingredient.name}}
+        </div>
+        <p>Glass: {{vm.drinkRecipe.glass_name}}</p>
+        <p>Ice: {{vm.drinkRecipe.ice_name}}</p>
+        <p>Garnish: {{vm.drinkRecipe.garnish}}</p>
+        <button ng-click="editing=true">Edit Drink</button>
+        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
     </div>
-    <p>Glass: {{vm.drinkRecipe.glass_name}}</p>
-    <p>Ice: {{vm.drinkRecipe.ice_name}}</p>
-    <p>Garnish: {{vm.drinkRecipe.garnish}}</p>
-    <button>Edit Drink</button>
-    <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
+    <div ng-show="editing==true">
+        <p>
+            Drink Name: 
+            <input type="text" ng-model="vm.drinkRecipe.recipe_name">
+        </p>
+        <p>
+            Ingredients: 
+                <input type="number" placeholder="Quantity" ng-model="vm.drinkIngredients.quantity">
+                <input type="text" placeholder="Ingredient" ng-model="vm.drinkIngredients.name">
+                <button ng-click="vm.addIngredient(vm.drinkIngredients)">+</button>
+        </p>
+        <p ng-repeat="ingredient in vm.drinkIngredients">
+            {{ingredient.quantity}} {{ingredient.name}}
+        </p>
+        <p>
+            Glass: 
+            <select ng-model="vm.drinkRecipe.glass_name">
+                <option value="" disabled selected></option>
+                <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name}}</option>
+            </select>
+        </p>
+        <p>
+            Ice:  
+            <select ng-model="vm.drinkRecipe.ice_name">
+                <option value="" disabled selected></option>
+                <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name}}</option>
+            </select>
+        </p>
+        <p>
+            Garnish: 
+            <input type="text" ng-model="vm.drinkRecipe.garnish">
+        </p>
+        <p>
+            Notes: 
+            <input type="text" ng-model="vm.drinkRecipe.notes">
+        </p>
+        <p>
+            Search tags: 
+            <tags-input ng-model="vm.drinkRecipe.tags"></tags-input>
+        </p>
+        <button>Save Drink</button> 
+        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
+    </div>
     
 </div>

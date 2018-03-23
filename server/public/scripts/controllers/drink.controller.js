@@ -22,12 +22,8 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
   self.glassInputs = [];
   self.iceInputs = [];
 
-  console.log(self.newIngredient);
-  
-  
-
   self.saveDrink = function(){
-    if(self.newIngredient.name && self.newIngredient.quantity){
+    if(self.newIngredient.name){
       self.addIngredient(self.newIngredient);
     }
     if(self.newDrink.ingredients.length > 0 ){
@@ -54,8 +50,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
       url: `/drinks/${id}`
     }).then(function(res){
       self.drinkDisplay = res.data;
-      console.log('got drinks for id', id);
-      
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })
