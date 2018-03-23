@@ -1,4 +1,4 @@
-myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', function(UserService, $http, $routeParams) {
+myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$location', function(UserService, $http, $routeParams, $location) {
   const self = this;
   
   self.userService = UserService;
@@ -107,6 +107,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
       url: `/drinks/${id}`
     }).then(function(res){
       self.getDrinks();
+      $location.path('/drinks');
     }).catch(function(error){
       console.log('error deleting drink', error);
     })
