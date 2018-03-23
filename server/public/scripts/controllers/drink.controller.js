@@ -21,20 +21,31 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', fun
 
   self.glassInputs = [];
   self.iceInputs = [];
+
+  console.log(self.newIngredient);
+  
   
 
   self.saveDrink = function(){
-    console.log(self.newDrink);
-    $http({
-      method: 'POST',
-      url: '/drinks',
-      data: self.newDrink
-    }).then(function(res){
-      self.newDrink = { ingredients: [], userId: self.userObject.userId};
-      console.log('newDrink', self.newDrink);
-    }).catch(function(error){
-      console.log('error on post', error);
-    })
+    if(self.newIngredient.name && self.newIngredient.quantity){
+      self.addIngredient(self.newIngredient);
+    }
+    if(self.newDrink.ingredients.length > 0 ){
+      $http({
+        method: 'POST',
+        url: '/drinks',
+        data: self.newDrink
+      }).then(function(res){
+        self.newDrink = { ingredients: [], userId: self.userObject.userId};
+        console.log('newDrink', self.newDrink);
+      }).catch(function(error){
+        console.log('error on post', error);
+      })
+    }
+    else{
+      alert('Please add ingredients');
+    }
+    
   }
 
   self.getDrinks = function(id){
