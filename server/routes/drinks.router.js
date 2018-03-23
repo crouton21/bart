@@ -5,30 +5,56 @@ const pool = require('../modules/pool');
 router.post('/', function(req, res){
     const newDrink = req.body;
     let array_to_send = [];
-    for (tag of newDrink.tags){
-        array_to_send.push("'"+tag.text+"'");
-    }
-    (async () => {
-        const client = await pool.connect()
-        try {
-        await client.query('BEGIN')
-        const { rows } = await client.query("INSERT INTO recipes (recipe_name, garnish, notes, glass_id, ice_id, user_id, tags) VALUES ($1, $2, $3, $4, $5, $6, ARRAY ["+array_to_send+"]) RETURNING recipe_id", [newDrink.name, newDrink.garnish, newDrink.notes, newDrink.glass, newDrink.ice, newDrink.userId])
-        for (ingredient of newDrink.ingredients){
-            let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
-            let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
-            await client.query(insertIngredientsText, insertIngredientsValues)
-        }  
-        await client.query('COMMIT')
-        } 
-        catch (e) {
-          await client.query('ROLLBACK')
-          throw e
-        } 
-        finally {
-          client.release()
+    if (newDrink.tags){
+        for (tag of newDrink.tags){
+            array_to_send.push("'"+tag.text+"'");
         }
-    })().catch(e => console.error(e.stack))
-    res.sendStatus(200);
+        (async () => {
+            const client = await pool.connect()
+            try {
+            await client.query('BEGIN')
+            const { rows } = await client.query("INSERT INTO recipes (recipe_name, garnish, notes, glass_id, ice_id, user_id, tags) VALUES ($1, $2, $3, $4, $5, $6, ARRAY ["+array_to_send+"]) RETURNING recipe_id", [newDrink.name, newDrink.garnish, newDrink.notes, newDrink.glass, newDrink.ice, newDrink.userId])
+            for (ingredient of newDrink.ingredients){
+                let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                await client.query(insertIngredientsText, insertIngredientsValues)
+            }  
+            await client.query('COMMIT')
+            } 
+            catch (e) {
+              await client.query('ROLLBACK')
+              throw e
+            } 
+            finally {
+              client.release()
+            }
+        })().catch(e => console.error(e.stack))
+        res.sendStatus(200);
+    }
+    else{
+        (async () => {
+            const client = await pool.connect()
+            try {
+            await client.query('BEGIN')
+            const { rows } = await client.query("INSERT INTO recipes (recipe_name, garnish, notes, glass_id, ice_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING recipe_id", [newDrink.name, newDrink.garnish, newDrink.notes, newDrink.glass, newDrink.ice, newDrink.userId])
+            for (ingredient of newDrink.ingredients){
+                let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                await client.query(insertIngredientsText, insertIngredientsValues)
+            }  
+            await client.query('COMMIT')
+            } 
+            catch (e) {
+              await client.query('ROLLBACK')
+              throw e
+            } 
+            finally {
+              client.release()
+            }
+        })().catch(e => console.error(e.stack))
+        res.sendStatus(200);
+    }
+    
 })
 
 router.get('/inputs', function(req, res){
