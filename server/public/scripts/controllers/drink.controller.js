@@ -48,22 +48,22 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     }
   }
 
-  self.editDrink = function(){
+  self.editDrink = function(id){
     console.log(self.drinkRecipe);
-    // if(self.drinkIngredients.length > 0 ){
-    //   $http({
-    //     method: 'PUT',
-    //     url: '/drinks',
-    //     data: self.drinkRecipe
-    //   }).then(function(res){
-    //     self.drinkRecipe = [];
-    //   }).catch(function(error){
-    //     console.log('error on post', error);
-    //   })
-    // }
-    // else{
-    //   alert('Please add ingredients');
-    // }
+    if(self.drinkIngredients.length > 0 ){
+      $http({
+        method: 'PUT',
+        url: '/drinks',
+        data: self.drinkRecipe
+      }).then(function(res){
+        self.getDrinkRecipe(id);
+      }).catch(function(error){
+        console.log('error on post', error);
+      })
+    }
+    else{
+      alert('Please add ingredients');
+    }
   }
 
   self.formatEditedDrink = function(){
@@ -76,7 +76,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     self.drinkRecipe.ingredients = self.drinkIngredients;
     self.drinkRecipe.glass_id = self.editedRecipe.glass_id;
     self.drinkRecipe.ice_id = self.editedRecipe.ice_id;
-    self.editDrink();
+    self.editDrink(self.drinkRecipe.recipe_id);
   }
 
   self.getDrinks = function(id){

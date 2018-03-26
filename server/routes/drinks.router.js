@@ -127,13 +127,13 @@ router.put('/', function(req, res){
             const client = await pool.connect()
             try {
             await client.query('BEGIN')
-            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5, tags = ARRAY ["+array_to_send+"]", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id])
-            await client.query("DELETE FROM ingredients WHERE ingredients.recipe_id = $1", [editedDrink.recipe])
+            await client.query(`DELETE FROM ingredients WHERE ingredients.recipe_id = $1`, [editedDrink.recipe_id])
             for (ingredient of editedDrink.ingredients){
                 let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
-                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, editedDrink.recipe_id];
                 await client.query(insertIngredientsText, insertIngredientsValues)
             }  
+            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5, tags = ARRAY ["+array_to_send+"] WHERE recipe_id=$6", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id, editedDrink.recipe_id])
             await client.query('COMMIT')
             } 
             catch (e) {
@@ -151,13 +151,13 @@ router.put('/', function(req, res){
             const client = await pool.connect()
             try {
             await client.query('BEGIN')
-            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id])
-            await client.query("DELETE FROM ingredients WHERE ingredients.recipe_id = $1", [editedDrink.recipe])
+            await client.query("DELETE FROM ingredients WHERE ingredients.recipe_id = $1", [editedDrink.recipe_id])
             for (ingredient of editedDrink.ingredients){
                 let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
-                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, editedDrink.recipe_id];
                 await client.query(insertIngredientsText, insertIngredientsValues)
             } 
+            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id])
             await client.query('COMMIT')
             } 
             catch (e) {
