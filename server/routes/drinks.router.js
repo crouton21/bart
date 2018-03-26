@@ -116,9 +116,60 @@ router.delete('/:id', function(req, res){
         })
 });
 
-// router.put('/', function(req, res){
-//     const editedDrink = req.body;
-//     let array_to_send = [];
-// })
+router.put('/', function(req, res){
+    const editedDrink = req.body;
+    let array_to_send = [];
+    if (editedDrink.tags){
+        for (tag of editedDrink.tags){
+            array_to_send.push("'"+tag.text+"'");
+        }
+        (async () => {
+            const client = await pool.connect()
+            try {
+            await client.query('BEGIN')
+            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5, tags = ARRAY ["+array_to_send+"]", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id])
+            await client.query("DELETE FROM ingredients WHERE ingredients.recipe_id = $1", [editedDrink.recipe])
+            for (ingredient of editedDrink.ingredients){
+                let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                await client.query(insertIngredientsText, insertIngredientsValues)
+            }  
+            await client.query('COMMIT')
+            } 
+            catch (e) {
+              await client.query('ROLLBACK')
+              throw e
+            } 
+            finally {
+              client.release()
+            }
+        })().catch(e => console.error(e.stack))
+        res.sendStatus(200);
+    }
+    else{
+        (async () => {
+            const client = await pool.connect()
+            try {
+            await client.query('BEGIN')
+            await client.query("UPDATE recipes SET recipe_name = $1, garnish = $2, notes = $3, glass_id = $4, ice_id = $5", [editedDrink.recipe_name, editedDrink.garnish, editedDrink.notes, editedDrink.glass_id, editedDrink.ice_id])
+            await client.query("DELETE FROM ingredients WHERE ingredients.recipe_id = $1", [editedDrink.recipe])
+            for (ingredient of editedDrink.ingredients){
+                let insertIngredientsText = `INSERT INTO "ingredients" ("ingredient_name", "ingredient_quantity", "recipe_id") VALUES ($1, $2, $3)`;
+                let insertIngredientsValues = [ingredient.name, ingredient.quantity, rows[0].recipe_id];
+                await client.query(insertIngredientsText, insertIngredientsValues)
+            } 
+            await client.query('COMMIT')
+            } 
+            catch (e) {
+              await client.query('ROLLBACK')
+              throw e
+            } 
+            finally {
+              client.release()
+            }
+        })().catch(e => console.error(e.stack))
+        res.sendStatus(200);
+    }
+})
 
 module.exports = router;
