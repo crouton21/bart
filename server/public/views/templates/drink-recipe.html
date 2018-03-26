@@ -1,52 +1,52 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
     <div ng-hide="editing==true">
-         <h2>{{vm.drinkRecipe.recipe_name}}</h2>
+         <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
         <div ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity}} {{ingredient.name}}
+            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
         </div>
-        <p>Glass: {{vm.drinkRecipe.glass_name}}</p>
-        <p>Ice: {{vm.drinkRecipe.ice_name}}</p>
-        <p>Garnish: {{vm.drinkRecipe.garnish}}</p>
-        <button ng-click="editing=true">Edit Drink</button>
-        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
+        <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
+        <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
+        <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
+        <button ng-click="editing=true">EDIT DRINK</button>
+        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</button>
     </div>
     <div ng-show="editing==true">
         <p>
-            Drink Name: 
+            DRINK NAME: 
             <input type="text" ng-model="vm.drinkRecipe.recipe_name">
         </p>
         <p>
-            Ingredients: 
-                <input type="number" placeholder="Quantity" ng-model="vm.drinkIngredients.quantity">
-                <input type="text" placeholder="Ingredient" ng-model="vm.drinkIngredients.name">
+            INGREDIENTS: 
+                <input type="text" placeholder="INGREDIENT" ng-model="vm.drinkIngredients.name">
+                <input type="text" placeholder="QUANTITY" ng-model="vm.drinkIngredients.quantity">
                 <button ng-click="vm.addIngredient(vm.drinkIngredients)">+</button>
         </p>
         <p ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity}} {{ingredient.name}} <button>-</button>
+            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <button>-</button>
         </p>
         <p>
-            Glass: 
-            <select ng-model="vm.drinkRecipe.glass_name" ng-options="glass as glass.glass_name for glass in vm.glassInputs"></select>
+            GLASS: 
+            <select ng-model="vm.drinkRecipe.glass_name" ng-options="glass as glass.glass_name.toUpperCase() for glass in vm.glassInputs"></select>
         </p>
         <p>
-            Ice:  
-            <select ng-model="vm.drinkRecipe.ice_name" ng-options="ice as ice.ice_name for ice in vm.iceInputs"></select> 
+            ICE:  
+            <select ng-model="vm.drinkRecipe.ice_name" ng-options="ice as ice.ice_name.toUpperCase() for ice in vm.iceInputs"></select> 
         </p>
         <p>
-            Garnish: 
+            GARNISH: 
             <input type="text" ng-model="vm.drinkRecipe.garnish">
         </p>
         <p>
-            Notes: 
+            NOTES: 
             <input type="text" ng-model="vm.drinkRecipe.notes">
         </p>
         <p>
-            Search tags: 
+            SEARCH TAGS: 
             <tags-input ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
-        <button>Save Drink</button> 
-        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">Delete Drink</button>
+        <button>SAVE DRINK</button> 
+        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</button>
     </div>
     
 </div>

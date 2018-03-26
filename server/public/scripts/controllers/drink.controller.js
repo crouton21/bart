@@ -1,4 +1,4 @@
-myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$location', function(UserService, $http, $routeParams, $location) {
+myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$location', '$mdDialog', '$mdToast', function(UserService, $http, $routeParams, $location, $mdDialog, $mdToast) {
   const self = this;
   
   self.userService = UserService;
@@ -107,16 +107,20 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     })
   }
 
-  self.confirmDelete = function(id){
-    let deleteThisDrink = confirm('Are you sure you want to delete this drink?');
-    deleteThisDrink;
-    if (deleteThisDrink == true){
-        self.deleteDrink(id);
-    }
-    else {
-        console.log('not deleted');
-    }
-  } 
+
+  self.confirmDelete = function(id, ev) {
+    let confirm = $mdDialog.confirm()
+          .title('Are you sure you want to delete this drink?')
+          .targetEvent(ev)
+          .ok('DELETE')
+          .cancel('CANCEL');
+
+    $mdDialog.show(confirm).then(function() {
+      self.deleteDrink(id);
+    }, function() {
+      console.log('not deleted');
+    });
+  };
 
 
 }]);

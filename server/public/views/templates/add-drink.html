@@ -2,45 +2,45 @@
 <br>
 <div class="container">
   <p>
-    Drink Name: 
+    DRINK NAME: 
     <input type="text" ng-model="vm.newDrink.name">
   </p>
   <p>
-    Ingredients: 
-      <input type="number" placeholder="Quantity" ng-model="vm.newIngredient.quantity">
-      <input type="text" placeholder="Ingredient" ng-model="vm.newIngredient.name">
+    INGREDIENTS: 
+      <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
+      <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
       <button ng-click="vm.addIngredient(vm.newIngredient)">+</button>
   </p>
   <p ng-repeat="ingredient in vm.newDrink.ingredients">
-    {{ingredient.quantity}} {{ingredient.name}} <button ng-click="removeIngredient">-</button>
+    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <button ng-click="removeIngredient">-</button>
   </p>
   <p>
-    Glass: 
+    GLASS: 
     <select ng-model="vm.newDrink.glass">
         <option value="" disabled selected></option>
-        <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name}}</option>
+        <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name.toUpperCase()}}</option>
     </select>
   </p>
   <p>
-    Ice:  
+    ICE:  
     <select ng-model="vm.newDrink.ice">
         <option value="" disabled selected></option>
-        <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name}}</option>
+        <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name.toUpperCase()}}</option>
     </select>
   </p>
   <p>
-    Garnish: 
+    GARNISH: 
     <input type="text" ng-model="vm.newDrink.garnish">
   </p>
   <p>
-    Notes: 
+    NOTES: 
     <input type="text" ng-model="vm.newDrink.notes">
   </p>
   <p>
-    Search tags: 
-    <tags-input ng-model="vm.newDrink.tags"></tags-input>
+    SEARCH TAGS
+    <tags-input placeholder="+" class="tagStyle" ng-model="vm.newDrink.tags"></tags-input>
   </p>
-  <button ng-click="vm.saveDrink()">Save Drink</button>
+  <button ng-click="vm.saveDrink()">SAVE DRINK</button>
   <br>
   <br>
 </div>

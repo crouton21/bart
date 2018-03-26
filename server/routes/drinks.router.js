@@ -59,7 +59,11 @@ router.post('/', function(req, res){
 
 router.get('/inputs', function(req, res){
     const queryText = `SELECT * FROM glasses ORDER BY glass_name;
-            SELECT * FROM ice ORDER BY ice_name`;
+            SELECT * FROM ice ORDER BY CASE WHEN ice_name = 'none'
+            THEN 1 -- last
+            ELSE 0 -- first
+            END ASC,
+            ice_name ASC `;
     pool.query(queryText)
         .then((result) => {
             res.send(result);
@@ -108,6 +112,7 @@ router.delete('/:id', function(req, res){
         })
         .catch(function(error){
             res.sendStatus(500);
+            console.log('error deleting drink', error); 
         })
 });
 
