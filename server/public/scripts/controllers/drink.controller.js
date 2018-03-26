@@ -41,7 +41,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     else{
       alert('Please add ingredients');
     }
-    
   }
 
   self.getDrinks = function(id){
@@ -121,4 +120,12 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     });
   };
 
+  self.removeIngredient = function(ingredient){
+    if(self.newDrink.ingredients.length > 0 ){
+      self.newDrink.ingredients.splice(self.newDrink.ingredients.indexOf(ingredient));
+    }
+    else if (self.drinkIngredients.length > 0){
+      self.drinkIngredients.splice(self.drinkIngredients.indexOf(ingredient));
+    }
+  }
 }]);

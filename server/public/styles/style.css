@@ -1,7 +1,12 @@
 body, html {
   margin: 0;
-  padding: 25px;
+  padding: 0;
   font-size: 16px;
+  font-family: 'noway', sans-serif;
+  letter-spacing: 2.5px;
+}
+
+input::placeholder {
   font-family: 'noway', sans-serif;
   letter-spacing: 2.5px;
 }
@@ -25,8 +30,9 @@ body, html {
   margin-top: 10px;
 }
 
-.container p{
-  margin-top : 14px;
+.container {
+  padding : 25px;
+  padding-left: 45px;
 }
 
 .message {
@@ -53,6 +59,8 @@ body, html {
   background-color: peachpuff;
   width: 100%;
   border-radius: 0px;
+  /* padding: 15px; */
+  padding-left: 0px;
 }
 
 ul {
@@ -78,12 +86,6 @@ li a {
 li a:hover {
   text-decoration: underline;
   color: #eee;
-}
-
-.logo {
-  font-size: 100px; 
-  font-family: 'bubbleBoy', sans-serif;
-  font-weight: bolder;
 }
 
 @font-face {
@@ -127,4 +129,10 @@ li a:hover {
 .logo {
   font-size: 200px;
   font-family: 'noway', sans-serif;
+  font-weight: lighter;
 }
+
+.nav-logo {
+  font-size: 100px;
+}
+

@@ -1,18 +1,15 @@
 <div ng-controller="UserController as vm" ng-include="'views/partials/nav.html'"></div>
 <br>
 <div class="container">
-  <p>
-    DRINK NAME: 
-    <input type="text" ng-model="vm.newDrink.name">
-  </p>
-  <p>
-    INGREDIENTS: 
-      <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
-      <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
-      <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
-  </p>
+  <md-input-container md-no-float class="md-block title">
+    <input ng-model="vm.newDrink.name" placeholder="DRINK NAME">
+  </md-input-container>
+  INGREDIENTS: 
+    <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
+    <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
+    <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
   <p ng-repeat="ingredient in vm.newDrink.ingredients">
-    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="removeIngredient">-</md-button>
+    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient(ingredient)">-</md-button>
   </p>
   <p>
     <md-input-container class="md-block" flex-gt-sm>
@@ -25,19 +22,26 @@
       </md-input-container>
   </p>
   <p>
-    ICE:  
-    <select ng-model="vm.newDrink.ice">
-        <option value="" disabled selected></option>
-        <option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>{{ice.ice_name.toUpperCase()}}</option>
-    </select>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>ICE</label>
+        <md-select ng-model="vm.newDrink.ice">
+          <md-option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>
+              {{ice.ice_name.toUpperCase()}}
+          </md-option>
+        </md-select>
+      </md-input-container>
   </p>
   <p>
-    GARNISH: 
-    <input type="text" ng-model="vm.newDrink.garnish">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>GARNISH</label>
+        <input ng-model="vm.newDrink.garnish">
+    </md-input-container>
   </p>
   <p>
-    NOTES: 
-    <input type="text" ng-model="vm.newDrink.notes">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>NOTES</label>
+        <input ng-model="vm.newDrink.notes">
+    </md-input-container>
   </p>
   <p>
     SEARCH TAGS

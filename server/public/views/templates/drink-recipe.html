@@ -11,11 +11,10 @@
         <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
         <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
     </div>
-    <div ng-show="editing==true">
-        <p>
-            DRINK NAME: 
-            <input type="text" ng-model="vm.drinkRecipe.recipe_name">
-        </p>
+    <div ng-show="editing==true" class="container">
+        <md-input-container md-no-float class="md-block title">
+            <input ng-model="vm.drinkRecipe.recipe_name" placeholder="DRINK NAME">
+        </md-input-container>
         <p>
             INGREDIENTS: 
                 <input type="text" placeholder="INGREDIENT" ng-model="vm.drinkIngredients.name">
@@ -23,30 +22,46 @@
                 <md-button class="md-raised" ng-click="vm.addIngredient(vm.drinkIngredients)">+</md-button>
         </p>
         <p ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised">-</md-button>
+            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient(ingredient)">-</md-button>
         </p>
         <p>
-            GLASS: 
-            <select ng-model="vm.drinkRecipe.glass_name" ng-options="glass as glass.glass_name.toUpperCase() for glass in vm.glassInputs"></select>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>GLASS</label>
+                <md-select ng-model="vm.drinkRecipe.glass_name">
+                    <md-option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>
+                        {{glass.glass_name.toUpperCase()}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </p>
         <p>
-            ICE:  
-            <select ng-model="vm.drinkRecipe.ice_name" ng-options="ice as ice.ice_name.toUpperCase() for ice in vm.iceInputs"></select> 
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>ICE</label>
+                <md-select ng-model="vm.drinkRecipe.ice_name">
+                    <md-option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}}>
+                        {{ice.ice_name.toUpperCase()}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </p>
+        <br>
         <p>
-            GARNISH: 
-            <input type="text" ng-model="vm.drinkRecipe.garnish">
-        </p>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>GARNISH</label>
+                <input ng-model="vm.drinkRecipe.garnish">
+            </md-input-container>
+        </p>    
         <p>
-            NOTES: 
-            <input type="text" ng-model="vm.drinkRecipe.notes">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>NOTES</label>
+                <input ng-model="vm.drinkRecipe.notes">
+            </md-input-container>
         </p>
         <p>
             SEARCH TAGS: 
-            <tags-input ng-model="vm.drinkRecipe.tags"></tags-input>
+            <tags-input placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
         <md-button class="md-raised">SAVE DRINK</md-button> 
         <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</md-button>
-    </div>
-    
+    </div>    
 </div>
