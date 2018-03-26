@@ -48,6 +48,35 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     }
   }
 
+  self.editDrink = function(){
+    console.log(self.drinkRecipe);
+    // if(self.drinkIngredients.length > 0 ){
+    //   $http({
+    //     method: 'PUT',
+    //     url: '/drinks',
+    //     data: self.drinkRecipe
+    //   }).then(function(res){
+    //     self.drinkRecipe = [];
+    //   }).catch(function(error){
+    //     console.log('error on post', error);
+    //   })
+    // }
+    // else{
+    //   alert('Please add ingredients');
+    // }
+  }
+
+  self.formatEditedDrink = function(){
+    delete self.drinkRecipe.ingredient_name;
+    delete self.drinkRecipe.ingredient_quantity;
+    delete self.drinkRecipe.ingredient_id;
+    if(self.newIngredient.name){
+      self.addIngredientEdit(self.newIngredient);
+    }
+    self.drinkRecipe.ingredients = self.drinkIngredients;
+    self.editDrink();
+  }
+
   self.getDrinks = function(id){
     $http({
       method: 'GET',
@@ -135,4 +164,5 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
       self.drinkIngredients.splice(self.drinkIngredients.indexOf(ingredient));
     }
   }
+
 }]);

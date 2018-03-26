@@ -116,4 +116,9 @@ router.delete('/:id', function(req, res){
         })
 });
 
+// router.put('/', function(req, res){
+//     const editedDrink = req.body;
+//     let array_to_send = [];
+// })
+
 module.exports = router;

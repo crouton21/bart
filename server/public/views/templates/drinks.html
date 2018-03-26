@@ -1,7 +1,13 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container" ng-controller="DrinkController as vm" class="container">
     <h2>DRINKS</h2>
-    <div ng-repeat="drink in vm.drinkDisplay">
-        <md-button ng-href="#!/drinks/{{drink.recipe_id}}">{{drink.recipe_name.toUpperCase()}}</md-button>
+
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>SEARCH BY NAME</label>
+        <input ng-model="search">
+    </md-input-container>
+
+    <div ng-repeat="drink in vm.drinkDisplay | filter:search">
+        <a ng-href="#!/drinks/{{drink.recipe_id}}">{{drink.recipe_name.toUpperCase()}}</a>
     </div>
 </div>
