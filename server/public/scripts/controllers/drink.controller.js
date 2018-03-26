@@ -68,6 +68,12 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     }
   }
 
+  self.formatTags = function(recipe){
+    if (recipe.tags.length > 0){
+      
+    }
+  }
+
   self.getDrinkRecipe = function(id){
     $http({
       method: 'GET',
@@ -75,6 +81,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     }).then(function(res){
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
+      // self.formatTags(res.data);
       console.log(res.data);
     }).catch(function(error){
       console.log('error on getting drinks', error);
