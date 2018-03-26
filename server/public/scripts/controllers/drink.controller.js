@@ -21,7 +21,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
 
   self.drinkDisplay = [];
 
-  self.drinkRecipe = [];
+  self.drinkRecipe = {};
   self.drinkIngredients = [];
 
   self.glassInputs = [];
@@ -74,6 +74,8 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
       self.addIngredientEdit(self.newIngredient);
     }
     self.drinkRecipe.ingredients = self.drinkIngredients;
+    self.drinkRecipe.glass_id = self.editedRecipe.glass_id;
+    self.drinkRecipe.ice_id = self.editedRecipe.ice_id;
     self.editDrink();
   }
 
@@ -98,15 +100,15 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
   }
 
   self.getDrinkRecipe = function(id){
-    self.drinkRecipe = [];
+    self.drinkRecipe = {};
     self.drinkIngredients = [];
     $http({
       method: 'GET',
       url: `/drinks/recipe/${id}`
     }).then(function(res){
+      console.log(res.data);
       self.drinkRecipe = res.data[0];
       self.formatIngredients(res.data);
-      console.log(res.data);
     }).catch(function(error){
       console.log('error on getting drinks', error);
     })

@@ -28,7 +28,7 @@
         <p>
             <md-input-container class="md-block" flex-gt-sm>
                 <label>GLASS</label>
-                <md-select ng-model="vm.drinkRecipe.glass_name">
+                <md-select ng-model="vm.editedRecipe.glass_id">
                     <md-option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}} ng-selected="vm.drinkRecipe.glass_id == glass.glass_id">
                         {{glass.glass_name.toUpperCase()}}
                     </md-option>
@@ -39,7 +39,7 @@
         <p>
             <md-input-container class="md-block" flex-gt-sm>
                 <label>ICE</label>
-                <md-select ng-model="vm.drinkRecipe.ice_name">
+                <md-select ng-model="vm.editedRecipe.ice_id">
                     <md-option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}} ng-selected="vm.drinkRecipe.ice_id == ice.ice_id">
                         {{ice.ice_name.toUpperCase()}}
                     </md-option>
