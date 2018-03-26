@@ -8,8 +8,8 @@
         <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
         <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
         <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
-        <button ng-click="editing=true">EDIT DRINK</button>
-        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</button>
+        <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
+        <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
     </div>
     <div ng-show="editing==true">
         <p>
@@ -20,10 +20,10 @@
             INGREDIENTS: 
                 <input type="text" placeholder="INGREDIENT" ng-model="vm.drinkIngredients.name">
                 <input type="text" placeholder="QUANTITY" ng-model="vm.drinkIngredients.quantity">
-                <button ng-click="vm.addIngredient(vm.drinkIngredients)">+</button>
+                <md-button class="md-raised" ng-click="vm.addIngredient(vm.drinkIngredients)">+</md-button>
         </p>
         <p ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <button>-</button>
+            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised">-</md-button>
         </p>
         <p>
             GLASS: 
@@ -45,8 +45,8 @@
             SEARCH TAGS: 
             <tags-input ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
-        <button>SAVE DRINK</button> 
-        <button ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</button>
+        <md-button class="md-raised">SAVE DRINK</md-button> 
+        <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</md-button>
     </div>
     
 </div>

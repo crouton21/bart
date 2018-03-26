@@ -107,7 +107,6 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     })
   }
 
-
   self.confirmDelete = function(id, ev) {
     let confirm = $mdDialog.confirm()
           .title('Are you sure you want to delete this drink?')
@@ -121,6 +120,5 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
       console.log('not deleted');
     });
   };
-
 
 }]);

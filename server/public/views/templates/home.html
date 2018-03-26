@@ -1,18 +1,16 @@
 <div class="container">
-<h1>BART</h1>
+    <div class="logo">BART</div>
     <h1 class="lead alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</h2>
-    <form ng-submit="vm.login()">
-      <div>
-          <label for="username">USERNAME:</label>
-          <input type="text" ng-model="vm.user.username" />
-      </div>
-      <div>
-          <label for="password">PASSWORD:</label>
-          <input type="password" ng-model="vm.user.password" />
-      </div>
-      <div>
-          <input class="btn btn-default" type="submit" name="submit" value="Log In" />
-          <a href="#!register">REGISTER</a>
-      </div>
-    </form>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>USERNAME</label>
+        <input ng-model="vm.user.username">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>PASSWORD</label>
+        <input ng-model="vm.user.password" type="password">
+    </md-input-container>
+    <div>
+        <md-button class="md-raised" ng-click="vm.login()">LOG IN</md-button>
+        <md-button class="md-raised" ng-href="#!register">REGISTER</md-button>
+    </div>
 </div>

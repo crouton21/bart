@@ -9,17 +9,20 @@
     INGREDIENTS: 
       <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
       <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
-      <button ng-click="vm.addIngredient(vm.newIngredient)">+</button>
+      <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
   </p>
   <p ng-repeat="ingredient in vm.newDrink.ingredients">
-    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <button ng-click="removeIngredient">-</button>
+    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="removeIngredient">-</md-button>
   </p>
   <p>
-    GLASS: 
-    <select ng-model="vm.newDrink.glass">
-        <option value="" disabled selected></option>
-        <option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>{{glass.glass_name.toUpperCase()}}</option>
-    </select>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>GLASS</label>
+        <md-select ng-model="vm.newDrink.glass">
+          <md-option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}}>
+              {{glass.glass_name.toUpperCase()}}
+          </md-option>
+        </md-select>
+      </md-input-container>
   </p>
   <p>
     ICE:  
@@ -40,7 +43,7 @@
     SEARCH TAGS
     <tags-input placeholder="+" class="tagStyle" ng-model="vm.newDrink.tags"></tags-input>
   </p>
-  <button ng-click="vm.saveDrink()">SAVE DRINK</button>
+  <md-button class="md-raised" ng-click="vm.saveDrink()">SAVE DRINK</md-button>
   <br>
   <br>
 </div>
