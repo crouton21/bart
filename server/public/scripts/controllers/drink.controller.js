@@ -14,6 +14,11 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     self.newIngredient = {};
   }
 
+  self.addIngredientEdit = function(newIngredient){
+    self.drinkIngredients.push(newIngredient);
+    self.newIngredient = {};
+  }
+
   self.drinkDisplay = [];
 
   self.drinkRecipe = [];
