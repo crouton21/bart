@@ -2,6 +2,7 @@
 <div ng-controller="DrinkController as vm" class="container">
     <div ng-hide="editing==true">
          <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
+         <div class="half-circle"></div>
         <div ng-repeat="ingredient in vm.drinkIngredients">
             {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
         </div>
@@ -11,7 +12,7 @@
         <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
         <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
     </div>
-    <div ng-show="editing==true" class="container">
+    <div ng-show="editing==true">
         <md-input-container md-no-float class="md-block title">
             <input ng-model="vm.drinkRecipe.recipe_name" placeholder="DRINK NAME">
         </md-input-container>
