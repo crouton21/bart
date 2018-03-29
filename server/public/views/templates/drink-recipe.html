@@ -4,7 +4,7 @@
         <div class="image">
             <div class="collins" ng-if="vm.drinkRecipe.glass_name == 'collins'"></div>
             <div class="punch" ng-if="vm.drinkRecipe.glass_name == 'punch'"></div>
-            <div class="rocks" ng-if="vm.drinkRecipe.glass_name == 'rocks'"></div>
+            <div class="rocks" ng-if="vm.drinkRecipe.glass_name == 'rocks' || vm.drinkRecipe.glass_name == 'shot'"></div>
             <div class="highball" ng-if="vm.drinkRecipe.glass_name == 'highball'"></div>
             <div class="martini" ng-if="vm.drinkRecipe.glass_name == 'martini'">
                 <div class="martiniCup"></div>

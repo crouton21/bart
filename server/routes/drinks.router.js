@@ -77,7 +77,7 @@ router.get('/inputs', function(req, res){
 router.get('/:id', function(req, res){
     const id = req.params.id;
     const queryText = `SELECT recipes.recipe_name, recipes.recipe_id FROM recipes 
-            WHERE recipes.user_id = $1`;
+            WHERE recipes.user_id = $1 ORDER BY recipes.recipe_name`;
     pool.query(queryText, [req.user.id])
         .then(function(result){
             res.send(result.rows);
