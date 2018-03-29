@@ -5,10 +5,10 @@
     <input ng-model="vm.newDrink.name" placeholder="DRINK NAME">
   </md-input-container>
   INGREDIENTS: 
-    <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
     <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
+    <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
     <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
-  <p ng-repeat="ingredient in vm.newDrink.ingredients">
+  <p class="ingredients" ng-repeat="ingredient in vm.newDrink.ingredients">
     {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient(ingredient)">-</md-button>
   </p>
   <p>

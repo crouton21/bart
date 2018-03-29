@@ -1,12 +1,17 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container" ng-controller="DrinkController as vm" class="container">
-    <h2>DRINKS</h2>
-    <div ng-init="vm.drinkDisplay"></div>
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>SEARCH BY NAME</label>
-        <input ng-model="searchText">
-    </md-input-container>
-    <div ng-repeat="drink in vm.drinkDisplay | filter:searchText">
-        <a ng-href="#!/drinks/{{drink.recipe_id}}">{{drink.recipe_name.toUpperCase()}}</a>
+    <div ng-hide="vm.drinkDisplay.length == 0">
+        <h2>DRINKS</h2>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>SEARCH</label>
+            <input ng-model="searchText">
+        </md-input-container>
+        <div ng-repeat="drink in vm.drinkDisplay | filter:searchText">
+            <a class="drink" ng-href="#!/drinks/{{drink.recipe_id}}">{{drink.recipe_name.toUpperCase()}}</a>
+        </div>
+    </div>
+    <div ng-show="vm.drinkDisplay.length == 0">
+        <h2>NO DRINKS TO DISPLAY</h2>
+        <md-button class="md-raised" ng-href="#!/add-drink">ADD A DRINK</md-button>
     </div>
 </div>

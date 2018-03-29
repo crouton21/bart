@@ -136,3 +136,25 @@ li a:hover {
   font-size: 100px;
 }
 
+.ingredients {
+  margin-left: 35px;
+}
+
+a.drink:link {
+  color: black;
+  text-decoration: none;
+  background-color: peachpuff;
+  padding: 14px 25px;
+  display: inline-block;
+  margin: 5px;
+}
+
+a.drink:visited {
+  color: black;
+}
+
+a.drink:hover {
+  color: white;
+}
+
+

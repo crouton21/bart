@@ -11,10 +11,12 @@
                 <div class="stem"></div>
                 <div class="base"></div>
             </div>
-            <div class="cordial" ng-if="vm.drinkRecipe.glass_name == 'cordial'">
+            <div class="cordial" ng-if="vm.drinkRecipe.glass_name == 'coupe'">
                 <div class="cordialCup"></div>
                 <div class="stem"></div>
                 <div class="base"></div>
+            </div>
+            <div class="flute" ng-if="vm.drinkRecipe.glass_name == 'cordial'">
             </div>
         </div>
         <div class="recipe">
@@ -25,6 +27,7 @@
             <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
             <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
             <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
+            <p ng-if="vm.drinkRecipe.notes.length > 0">NOTES: {{vm.drinkRecipe.notes.toUpperCase()}}</p>
             <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
             <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
         </div>
@@ -35,11 +38,11 @@
         </md-input-container>
         <p>
             INGREDIENTS: 
-                <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
                 <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
+                <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
                 <md-button class="md-raised" ng-click="vm.addIngredientEdit(vm.newIngredient)">+</md-button>
         </p>
-        <p ng-repeat="ingredient in vm.drinkIngredients">
+        <p class="ingredients" ng-repeat="ingredient in vm.drinkIngredients">
             {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient(ingredient)">-</md-button>
         </p>
         <br>
