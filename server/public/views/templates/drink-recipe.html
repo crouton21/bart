@@ -85,7 +85,7 @@
             <tags-input placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
         <md-button class="md-raised" ng-click="vm.getDrinkRecipe(vm.drinkRecipe.recipe_id); editing=false">CANCEL</md-button> 
-        <md-button class="md-raised" ng-click="vm.formatEditedDrink(); editing=false">SAVE CHANGES</md-button> 
+        <md-button class="md-raised" ng-click="vm.formatEditedDrink()" ng-href="#!/drinks">SAVE CHANGES</md-button> 
         <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</md-button>
     </div>    
 </div>
