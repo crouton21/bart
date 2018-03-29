@@ -135,14 +135,3 @@ li a:hover {
 .nav-logo {
   font-size: 100px;
 }
-
-.half-circle {
-  width: 200px;
-  height: 100px; /* as the half of the width */
-  border-bottom-left-radius: 110px;  /* 100px of height + 10px of border */
-  border-bottom-right-radius: 110px; /* 100px of height + 10px of border */
-  border: 2px solid black;
-  border-top: 0;
-  float: right;
-  padding-left: 100px;
-}

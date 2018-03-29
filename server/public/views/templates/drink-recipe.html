@@ -1,16 +1,33 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
     <div ng-hide="editing==true">
-         <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
-         <div class="half-circle"></div>
-        <div ng-repeat="ingredient in vm.drinkIngredients">
-            {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
+        <div class="image">
+            <div class="collins" ng-if="vm.drinkRecipe.glass_name == 'collins'"></div>
+            <div class="punch" ng-if="vm.drinkRecipe.glass_name == 'punch'"></div>
+            <div class="rocks" ng-if="vm.drinkRecipe.glass_name == 'rocks'"></div>
+            <div class="highball" ng-if="vm.drinkRecipe.glass_name == 'highball'"></div>
+            <div class="martini" ng-if="vm.drinkRecipe.glass_name == 'martini'">
+                <div class="martiniCup"></div>
+                <div class="stem"></div>
+                <div class="base"></div>
+            </div>
+            <div class="cordial" ng-if="vm.drinkRecipe.glass_name == 'cordial'">
+                <div class="cordialCup"></div>
+                <div class="stem"></div>
+                <div class="base"></div>
+            </div>
         </div>
-        <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
-        <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
-        <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
-        <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
-        <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
+        <div class="recipe">
+            <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
+            <div ng-repeat="ingredient in vm.drinkIngredients">
+                {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
+            </div>
+            <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
+            <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
+            <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
+            <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
+            <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
+        </div>
     </div>
     <div ng-show="editing==true">
         <md-input-container md-no-float class="md-block title">
