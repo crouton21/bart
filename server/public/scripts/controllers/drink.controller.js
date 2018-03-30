@@ -40,6 +40,27 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     );
   }
 
+  self.savedToast = function(event) {
+    $mdToast.show(
+        $mdToast.simple()
+        .textContent('DRINK SAVED')
+    );
+  }
+
+  self.editToast = function(event) {
+    $mdToast.show(
+        $mdToast.simple()
+        .textContent('CHANGES SAVED')
+    );
+  }
+
+  self.deleteToast = function(event) {
+    $mdToast.show(
+        $mdToast.simple()
+        .textContent('DRINK DELETED')
+    );
+  }
+
   self.saveDrink = function(){
     if(self.newIngredient.name){
       self.addIngredient(self.newIngredient);
@@ -54,6 +75,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
         data: self.newDrink
       }).then(function(res){
         self.newDrink = { ingredients: [], userId: self.userObject.userId};
+        self.savedToast();
         console.log('newDrink', self.newDrink);
       }).catch(function(error){
         console.log('error on post', error);
@@ -73,6 +95,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
       }).then(function(res){
         self.getDrinkRecipe(id);
         self.editing = false;
+        self.editToast();
       }).catch(function(error){
         console.log('error on post', error);
       })
@@ -152,6 +175,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     }).then(function(res){
       self.getDrinks();
       $location.path('/drinks');
+      self.deleteToast();
     }).catch(function(error){
       console.log('error deleting drink', error);
     })

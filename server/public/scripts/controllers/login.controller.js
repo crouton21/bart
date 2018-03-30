@@ -1,4 +1,4 @@
-myApp.controller('LoginController', ['$http', '$location', 'UserService', function($http, $location, UserService) {
+myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdToast', function($http, $location, UserService, $mdToast) {
     console.log('LoginController created');
     var self = this;
     self.user = {
@@ -18,6 +18,13 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
               // console.log('success: ', response.data);
               // location works with SPA (ng-route)
               $location.path('/drinks');
+              self.loginToast = function(event) {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .textContent(`CHEERS, ${self.user.username.toUpperCase()}!`)
+                );
+              }
+              self.loginToast();
             } else {
               console.log('failure error: ', response);
               self.message = "Incorrect credentials. Please try again.";
