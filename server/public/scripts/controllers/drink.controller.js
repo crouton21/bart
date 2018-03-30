@@ -29,15 +29,23 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
 
   self.editing;
 
+  self.requiredInputsAlert = function(ev){
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Please enter required (*) fields.')
+        .ok('OK')
+        .targetEvent(ev)
+    );
+  }
+
   self.saveDrink = function(){
     if(self.newIngredient.name){
       self.addIngredient(self.newIngredient);
     }
-    if(self.newDrink.ingredients.length == 0 ){
-      alert('Please add ingredients')
-    }
-    else if(!self.newDrink.name || !self.newDrink.glass || !self.newDrink.ice){
-      alert('Please enter required fields')
+    if(self.newDrink.ingredients.length == 0 || !self.newDrink.name || !self.newDrink.glass || !self.newDrink.ice){
+      self.requiredInputsAlert();
     }
     else {
       $http({
@@ -54,11 +62,8 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
   }
 
   self.editDrink = function(id){
-    if(self.drinkIngredients.length == 0){
-      alert('Please add ingredients');
-    }
-    else if ( self.drinkRecipe.recipe_name.length == 0 || self.drinkRecipe.glass_id.length == 0 || self.drinkRecipe.ice_id.length == 0){
-      alert('Please enter required fields')
+    if (self.drinkIngredients.length == 0 || self.drinkRecipe.recipe_name.length == 0 || self.drinkRecipe.glass_id.length == 0 || self.drinkRecipe.ice_id.length == 0){
+      self.requiredInputsAlert();
     }
     else {
       $http({

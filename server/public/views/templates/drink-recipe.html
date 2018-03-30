@@ -37,7 +37,7 @@
             <input ng-model="vm.drinkRecipe.recipe_name" placeholder="DRINK NAME">
         </md-input-container>
         <p>
-            INGREDIENTS: 
+            INGREDIENTS * 
                 <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
                 <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
                 <md-button class="md-raised" ng-click="vm.addIngredientEdit(vm.newIngredient)">+</md-button>
@@ -48,7 +48,7 @@
         <br>
         <p>
             <md-input-container class="md-block" flex-gt-sm>
-                <label>GLASS</label>
+                <label>GLASS *</label>
                 <md-select ng-model="vm.editedRecipe.glass_id">
                     <md-option ng-repeat="glass in vm.glassInputs" ng-value={{glass.glass_id}} ng-selected="vm.drinkRecipe.glass_id == glass.glass_id">
                         {{glass.glass_name.toUpperCase()}}
@@ -59,7 +59,7 @@
         <br>
         <p>
             <md-input-container class="md-block" flex-gt-sm>
-                <label>ICE</label>
+                <label>ICE *</label>
                 <md-select ng-model="vm.editedRecipe.ice_id">
                     <md-option ng-repeat="ice in vm.iceInputs" ng-value={{ice.ice_id}} ng-selected="vm.drinkRecipe.ice_id == ice.ice_id">
                         {{ice.ice_name.toUpperCase()}}
