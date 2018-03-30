@@ -162,3 +162,12 @@ a.drink:hover {
   font-size: 16px;
   letter-spacing: 2.5px;
 }
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+  border-color: darkgrey;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+  color: darkgray;
+}
+
