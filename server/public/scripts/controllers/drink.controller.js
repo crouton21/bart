@@ -196,12 +196,12 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     });
   };
 
-  self.removeIngredient = function(ingredient){
+  self.removeIngredient = function(index){
     if(self.newDrink.ingredients.length > 0 ){
-      self.newDrink.ingredients.splice(self.newDrink.ingredients.indexOf(ingredient));
+      self.newDrink.ingredients.splice(index, 1);
     }
     else if (self.drinkIngredients.length > 0){
-      self.drinkIngredients.splice(self.drinkIngredients.indexOf(ingredient));
+      self.drinkIngredients.splice(index, 1);
     }
   }
 

@@ -9,7 +9,7 @@
     <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
     <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
   <p class="ingredients" ng-repeat="ingredient in vm.newDrink.ingredients">
-    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient(ingredient)">-</md-button>
+    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}} <md-button class="md-raised" ng-click="vm.removeIngredient($index)">-</md-button>
   </p>
   <p>
     <md-input-container class="md-block" flex-gt-sm>
