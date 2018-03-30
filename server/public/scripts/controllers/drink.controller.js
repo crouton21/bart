@@ -116,10 +116,10 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
     self.editDrink(self.drinkRecipe.recipe_id);
   }
 
-  self.getDrinks = function(id){
+  self.getDrinks = function(){
     $http({
       method: 'GET',
-      url: `/drinks/${id}`
+      url: '/drinks'
     }).then(function(res){
       self.drinkDisplay = res.data;
     }).catch(function(error){
@@ -128,7 +128,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
   }
 
   self.getuser();
-  self.getDrinks(self.userObject.userId);
+  self.getDrinks();
 
   self.formatIngredients = function(recipe){
     for (ingredient of recipe){

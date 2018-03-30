@@ -74,8 +74,7 @@ router.get('/inputs', function(req, res){
             });
 });
 
-router.get('/:id', function(req, res){
-    const id = req.params.id;
+router.get('/', function(req, res){
     const queryText = `SELECT recipes.recipe_name, recipes.recipe_id, tags FROM recipes 
             WHERE recipes.user_id = $1 ORDER BY recipes.recipe_name`;
     pool.query(queryText, [req.user.id])
