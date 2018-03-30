@@ -27,11 +27,19 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
   self.glassInputs = [];
   self.iceInputs = [];
 
+  self.editing;
+
   self.saveDrink = function(){
     if(self.newIngredient.name){
       self.addIngredient(self.newIngredient);
     }
-    if(self.newDrink.ingredients.length > 0 ){
+    if(self.newDrink.ingredients.length == 0 ){
+      alert('Please add ingredients')
+    }
+    else if(!self.newDrink.name || !self.newDrink.glass || !self.newDrink.ice){
+      alert('Please enter required fields')
+    }
+    else {
       $http({
         method: 'POST',
         url: '/drinks',
@@ -43,26 +51,26 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
         console.log('error on post', error);
       })
     }
-    else{
-      alert('Please add ingredients');
-    }
   }
 
   self.editDrink = function(id){
-    console.log(self.drinkRecipe);
-    if(self.drinkIngredients.length > 0 ){
+    if(self.drinkIngredients.length == 0){
+      alert('Please add ingredients');
+    }
+    else if ( self.drinkRecipe.recipe_name.length == 0 || self.drinkRecipe.glass_id.length == 0 || self.drinkRecipe.ice_id.length == 0){
+      alert('Please enter required fields')
+    }
+    else {
       $http({
         method: 'PUT',
         url: '/drinks',
         data: self.drinkRecipe
       }).then(function(res){
         self.getDrinkRecipe(id);
+        self.editing = false;
       }).catch(function(error){
         console.log('error on post', error);
       })
-    }
-    else{
-      alert('Please add ingredients');
     }
   }
 

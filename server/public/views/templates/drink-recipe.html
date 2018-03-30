@@ -1,6 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
-    <div ng-hide="editing==true">
+    <div ng-hide="vm.editing==true">
         <div class="image">
             <div class="collins" ng-if="vm.drinkRecipe.glass_name == 'collins'"></div>
             <div class="punch" ng-if="vm.drinkRecipe.glass_name == 'punch'"></div>
@@ -26,13 +26,13 @@
             </div>
             <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
             <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
-            <p>GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
+            <p ng-if="vm.drinkRecipe.garnish.length > 0">GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
             <p ng-if="vm.drinkRecipe.notes.length > 0">NOTES: {{vm.drinkRecipe.notes.toUpperCase()}}</p>
-            <md-button class="md-raised" ng-click="editing=true">EDIT DRINK</md-button>
+            <md-button class="md-raised" ng-click="vm.editing=true">EDIT DRINK</md-button>
             <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
         </div>
     </div>
-    <div ng-show="editing==true">
+    <div ng-show="vm.editing==true">
         <md-input-container md-no-float class="md-block title">
             <input ng-model="vm.drinkRecipe.recipe_name" placeholder="DRINK NAME">
         </md-input-container>
@@ -84,8 +84,8 @@
             SEARCH TAGS: 
             <tags-input placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
-        <md-button class="md-raised" ng-click="vm.getDrinkRecipe(vm.drinkRecipe.recipe_id); editing=false">CANCEL</md-button> 
-        <md-button class="md-raised" ng-click="vm.formatEditedDrink()" ng-href="#!/drinks">SAVE CHANGES</md-button> 
+        <md-button class="md-raised" ng-click="vm.getDrinkRecipe(vm.drinkRecipe.recipe_id); vm.editing=false">CANCEL</md-button> 
+        <md-button class="md-raised" ng-click="vm.formatEditedDrink()">SAVE CHANGES</md-button> 
         <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</md-button>
     </div>    
 </div>
