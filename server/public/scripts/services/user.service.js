@@ -1,4 +1,4 @@
-myApp.service('UserService', ['$http', '$location', function($http, $location){
+myApp.service('UserService', ['$http', '$location', '$mdDialog', function($http, $location, $mdDialog){
 
  const self = this;
   self.userObject = {};
@@ -29,5 +29,20 @@ myApp.service('UserService', ['$http', '$location', function($http, $location){
       console.log('UserService -- logout -- logged out');
       $location.path("/home");
     });
-  }
+  },
+
+  self.confirmLogout = function(ev) {
+    let confirm = $mdDialog.confirm()
+          .title('Are you sure you want to log out?')
+          .targetEvent(ev)
+          .ok('LOGOUT')
+          .cancel('CANCEL');
+
+    $mdDialog.show(confirm).then(function() {
+      self.logout();
+    }, function() {
+      console.log('cancel logout');
+    });
+  };
+
 }]);

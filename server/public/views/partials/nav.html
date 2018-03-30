@@ -2,10 +2,9 @@
   <div class="container">
     <ul>
       <li class="nav-logo">BART</li>
-      <li><a href="#!drinks">DRINKS</a></li>
-      <li><a href="#!add-drink">ADD DRINK</a></li>
-      <li><a href="#!home" ng-click="vm.userService.logout()">LOG OUT {{vm.userObject.userName.toUpperCase()}}</li>
+      <li><md-button class="navBtn" ng-href="#!drinks">DRINKS</md-button></li>
+      <li><md-button class="navBtn" ng-href="#!add-drink">ADD DRINK</md-button></li>
+      <li><md-button class="navBtn" ng-click="vm.userService.confirmLogout()">LOG OUT {{vm.userObject.userName.toUpperCase()}}</md-button></li>
     </ul>
-    
   </div>
 </div>

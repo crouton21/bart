@@ -157,4 +157,8 @@ a.drink:hover {
   color: white;
 }
 
-
+.md-button.navBtn {
+  color: white;
+  font-size: 16px;
+  letter-spacing: 2.5px;
+}
