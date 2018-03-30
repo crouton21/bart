@@ -1,4 +1,4 @@
-myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$location', '$mdDialog', '$mdToast', function(UserService, $http, $routeParams, $location, $mdDialog, $mdToast) {
+myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$location', '$mdDialog', '$mdToast', '$window', function(UserService, $http, $routeParams, $location, $mdDialog, $mdToast, $window) {
   const self = this;
   
   self.userService = UserService;
@@ -75,6 +75,7 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
         data: self.newDrink
       }).then(function(res){
         self.newDrink = { ingredients: [], userId: self.userObject.userId};
+        $window.scrollTo(0, 0);
         self.savedToast();
         console.log('newDrink', self.newDrink);
       }).catch(function(error){
