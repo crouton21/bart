@@ -95,7 +95,9 @@ myApp.controller('DrinkController', ['UserService', '$http', '$routeParams', '$l
         data: self.drinkRecipe
       }).then(function(res){
         self.getDrinkRecipe(id);
-        self.editing = false;
+        // $window.scrollTo(0, 0);
+        // self.editing = false;
+        $location.path('/drinks');
         self.editToast();
       }).catch(function(error){
         console.log('error on post', error);

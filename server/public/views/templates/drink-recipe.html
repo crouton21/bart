@@ -1,35 +1,34 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-controller="DrinkController as vm" class="container">
-    <div ng-hide="vm.editing==true">
-        <div class="image">
-            <div class="collins" ng-if="vm.drinkRecipe.glass_name == 'collins'"></div>
-            <div class="punch" ng-if="vm.drinkRecipe.glass_name == 'punch'"></div>
-            <div class="rocks" ng-if="vm.drinkRecipe.glass_name == 'rocks' || vm.drinkRecipe.glass_name == 'shot'"></div>
-            <div class="highball" ng-if="vm.drinkRecipe.glass_name == 'highball'"></div>
-            <div class="martini" ng-if="vm.drinkRecipe.glass_name == 'martini'">
-                <div class="martiniCup"></div>
-                <div class="stem"></div>
-                <div class="base"></div>
-            </div>
-            <div class="cordial" ng-if="vm.drinkRecipe.glass_name == 'coupe'">
-                <div class="cordialCup"></div>
-                <div class="stem"></div>
-                <div class="base"></div>
-            </div>
-            <div class="flute" ng-if="vm.drinkRecipe.glass_name == 'cordial'">
+    <div layout="row" ng-hide="vm.editing==true">
+        <div flex class="recipe">
+            <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
+            <div class="recipeContent">
+                <div ng-repeat="ingredient in vm.drinkIngredients">
+                    {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
+                </div>
+                <p><span class="title">GLASS :</span> &nbsp{{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
+                <p><span class="title">ICE :</span>  &nbsp{{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
+                <p ng-if="vm.drinkRecipe.garnish.length > 0"><span class="title">GARNISH :</span> &nbsp{{vm.drinkRecipe.garnish.toUpperCase()}}</p>
+                <p ng-if="vm.drinkRecipe.notes.length > 0"><span class="title">NOTES :</span> &nbsp{{vm.drinkRecipe.notes.toUpperCase()}}</p>
+                <br>
+                <md-button class="md-raised" ng-click="vm.editing=true">EDIT</md-button>
+                <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE</md-button>
             </div>
         </div>
-        <div class="recipe">
-            <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
-            <div ng-repeat="ingredient in vm.drinkIngredients">
-                {{ingredient.quantity.toUpperCase()}} {{ingredient.name.toUpperCase()}}
-            </div>
-            <p>GLASS: {{vm.drinkRecipe.glass_name.toUpperCase()}}</p>
-            <p>ICE: {{vm.drinkRecipe.ice_name.toUpperCase()}}</p>
-            <p ng-if="vm.drinkRecipe.garnish.length > 0">GARNISH: {{vm.drinkRecipe.garnish.toUpperCase()}}</p>
-            <p ng-if="vm.drinkRecipe.notes.length > 0">NOTES: {{vm.drinkRecipe.notes.toUpperCase()}}</p>
-            <md-button class="md-raised" ng-click="vm.editing=true">EDIT DRINK</md-button>
-            <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id)">DELETE DRINK</md-button>
+        <div flex class="image">
+            <img src="styles/glasses/coffee.png" width="60%" ng-if="vm.drinkRecipe.glass_name == 'coffee'">
+            <img src="styles/glasses/collins.png" width="55%" ng-if="vm.drinkRecipe.glass_name == 'collins'">
+            <img src="styles/glasses/coupe.png" width="75%" ng-if="vm.drinkRecipe.glass_name == 'coupe'">
+            <img src="styles/glasses/flute.png" height="85%" ng-if="vm.drinkRecipe.glass_name == 'flute'">
+            <img src="styles/glasses/highball.png" width="45%" ng-if="vm.drinkRecipe.glass_name == 'highball'">
+            <img src="styles/glasses/martini.png" width="75%" ng-if="vm.drinkRecipe.glass_name == 'martini'">
+            <img src="styles/glasses/mug.png" width="50%" ng-if="vm.drinkRecipe.glass_name == 'copper mug'">
+            <img src="styles/glasses/nick.png" width="55%" ng-if="vm.drinkRecipe.glass_name == 'nick and nora'">
+            <img src="styles/glasses/punch.png" width="85%" ng-if="vm.drinkRecipe.glass_name == 'punch'">
+            <img src="styles/glasses/rocks.png" width="65%" ng-if="vm.drinkRecipe.glass_name == 'rocks'">
+            <img src="styles/glasses/shot.png" width="55%" ng-if="vm.drinkRecipe.glass_name == 'shot'">
+            <img src="styles/glasses/snifter.png" width="70%" ng-if="vm.drinkRecipe.glass_name == 'snifter'">
         </div>
     </div>
     <div ng-show="vm.editing==true">
@@ -82,10 +81,11 @@
         </p>
         <p>
             SEARCH TAGS: 
-            <tags-input placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
+            <tags-input class="tagStyle" placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
+        <br>
         <md-button class="md-raised" ng-click="vm.getDrinkRecipe(vm.drinkRecipe.recipe_id); vm.editing=false">CANCEL</md-button> 
         <md-button class="md-raised" ng-click="vm.formatEditedDrink()">SAVE CHANGES</md-button> 
-        <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE DRINK</md-button>
+        <md-button class="md-raised" ng-click="vm.confirmDelete(vm.drinkRecipe.recipe_id, $event)">DELETE</md-button>
     </div>    
 </div>

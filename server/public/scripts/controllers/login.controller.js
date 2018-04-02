@@ -1,4 +1,4 @@
-myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdToast', function($http, $location, UserService, $mdToast) {
+myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdToast', '$mdDialog', function($http, $location, UserService, $mdToast, $mdDialog) {
     console.log('LoginController created');
     var self = this;
     self.user = {
@@ -7,9 +7,16 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdTo
     };
     self.message = '';
 
-    self.login = function () {
+    self.login = function (ev) {
       if (self.user.username === '' || self.user.password === '') {
-        self.message = "Enter your username and password!";
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Please enter your username and password.')
+            .ok('OK')
+            .targetEvent(ev)
+        );
       } else {
         // console.log('sending to server...', self.user);
         $http.post('/api/user/login', self.user).then(
@@ -27,19 +34,40 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdTo
               self.loginToast();
             } else {
               console.log('failure error: ', response);
-              self.message = "Incorrect credentials. Please try again.";
+              $mdDialog.show(
+                $mdDialog.alert()
+                  .parent(angular.element(document.querySelector('#popupContainer')))
+                  .clickOutsideToClose(true)
+                  .title('Incorrect credentials. Please try again.')
+                  .ok('OK')
+                  .targetEvent(ev)
+              );
             }
           },
           function (response) {
             console.log('failure error: ', response);
-            self.message = "Incorrect credentials. Please try again.";
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title('Incorrect credentials. Please try again.')
+                .ok('OK')
+                .targetEvent(ev)
+            );
           });
       }
     };
 
-    self.registerUser = function () {
+    self.registerUser = function (ev) {
       if (self.user.username === '' || self.user.password === '') {
-        self.message = "Choose a username and password!";
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Please choose a username and password.')
+            .ok('OK')
+            .targetEvent(ev)
+        );
       } else {
         console.log('sending to server...', self.user);
         $http.post('/api/user/register', self.user).then(function (response) {
@@ -48,7 +76,14 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', '$mdTo
         },
           function (response) {
             console.log('error');
-            self.message = "Something went wrong. Please try again."
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title('Something went wrong. Please try again.')
+                .ok('OK')
+                .targetEvent(ev)
+            );
           });
       }
     }

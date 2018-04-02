@@ -102,13 +102,13 @@ li a:hover {
 }
 
 .tagStyle .tags.focused {
-  border-color: #66afe9;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+  border-color: peachpuff;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px peachpuff;
 }
 
 .tagStyle .tags .tag-item {
-  background: #428bca;
-  border: 1px solid #357ebd;
+  background: peachpuff;
+  border: 1px solid peachpuff;
   border-radius: 4px;
   color: #fff;
 }
@@ -130,6 +130,7 @@ li a:hover {
   font-size: 200px;
   font-family: 'noway', sans-serif;
   font-weight: lighter;
+  text-align: center;
 }
 
 .nav-logo {
@@ -171,3 +172,36 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
   color: darkgray;
 }
 
+.image {
+  height: 500px;
+  width: 500px;
+}
+
+.recipe {
+  font-size: 120%;
+}
+
+.title {
+  font-size: 110%;
+  font-weight: bold;
+}
+
+.recipeContent {
+  margin-left: 20px;
+}
+
+.login {
+  background-color: peachpuff;
+  height: 500px;
+  width: 700px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.homeBtn {
+  text-align: center;
+}

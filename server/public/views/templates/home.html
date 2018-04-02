@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container login">
     <div class="logo">BART</div>
     <h1 class="lead alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</h2>
     <md-input-container class="md-block" flex-gt-sm>
@@ -9,7 +9,7 @@
         <label>PASSWORD</label>
         <input ng-model="vm.user.password" type="password">
     </md-input-container>
-    <div>
+    <div class="homeBtn">
         <md-button class="md-raised" ng-click="vm.login()">LOG IN</md-button>
         <md-button class="md-raised" ng-href="#!register">REGISTER</md-button>
     </div>
