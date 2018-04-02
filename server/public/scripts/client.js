@@ -1,7 +1,10 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngTagsInput', 'ngMaterial']);
 
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', function($routeProvider, $locationProvider, $mdThemingProvider) {
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('grey');
 
   $routeProvider
     .when('/', {
