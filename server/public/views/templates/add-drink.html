@@ -1,10 +1,10 @@
 <div ng-controller="UserController as vm" ng-include="'views/partials/nav.html'"></div>
 <br>
-<div class="container">
+<div class="container bartBody">
   <md-input-container md-no-float class="md-block title">
     <input ng-model="vm.newDrink.name" placeholder="DRINK NAME *">
   </md-input-container>
-  INGREDIENTS * 
+  <span class="inputTitle">INGREDIENTS * </span>
     <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
     <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
     <md-button class="md-raised" ng-click="vm.addIngredient(vm.newIngredient)">+</md-button>
@@ -44,11 +44,11 @@
     </md-input-container>
   </p>
   <p>
-    SEARCH TAGS
+    <span class="inputTitle">SEARCH TAGS</span>
     <tags-input placeholder="+" class="tagStyle" ng-model="vm.newDrink.tags"></tags-input>
   </p>
   <br>
-  <md-button class="md-raised" ng-click="vm.saveDrink()">SAVE DRINK</md-button>
+  <md-button class="md-raised" ng-click="vm.saveDrink()">SAVE</md-button>
   <br>
   <br>
 </div>

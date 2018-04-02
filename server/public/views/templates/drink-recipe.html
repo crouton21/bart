@@ -1,5 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div ng-controller="DrinkController as vm" class="container">
+<div ng-controller="DrinkController as vm" class="container bartBody">
     <div layout="row" ng-hide="vm.editing==true">
         <div flex class="recipe">
             <h2>{{vm.drinkRecipe.recipe_name.toUpperCase()}}</h2>
@@ -36,7 +36,7 @@
             <input ng-model="vm.drinkRecipe.recipe_name" placeholder="DRINK NAME">
         </md-input-container>
         <p>
-            INGREDIENTS * 
+            <span class="inputTitle">INGREDIENTS * </span>
                 <input type="text" placeholder="QUANTITY" ng-model="vm.newIngredient.quantity">
                 <input type="text" placeholder="INGREDIENT" ng-model="vm.newIngredient.name">
                 <md-button class="md-raised" ng-click="vm.addIngredientEdit(vm.newIngredient)">+</md-button>
@@ -80,7 +80,7 @@
             </md-input-container>
         </p>
         <p>
-            SEARCH TAGS: 
+            <span class="inputTitle">SEARCH TAGS: </span>
             <tags-input class="tagStyle" placeholder="+" ng-model="vm.drinkRecipe.tags"></tags-input>
         </p>
         <br>

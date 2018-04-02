@@ -135,6 +135,11 @@ li a:hover {
 
 .nav-logo {
   font-size: 100px;
+  margin-right: 20px;
+}
+
+.nav-link {
+  margin-top: 30px;
 }
 
 .ingredients {
@@ -172,9 +177,8 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
   color: darkgray;
 }
 
-.image {
-  height: 500px;
-  width: 500px;
+.image{
+  margin-top: 50px;
 }
 
 .recipe {
@@ -204,4 +208,20 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 
 .homeBtn {
   text-align: center;
+}
+
+md-select:not([disabled]):focus .md-select-value{
+  border-bottom-color: darkgray;
+}
+
+md-input-container.md-input-focused:not(.md-input-has-value) md-select .md-select-value.md-select-placeholder {
+  color: darkgray; 
+}
+
+.bartBody {
+  margin-left: 10px;
+}
+
+.inputTitle {
+  color: darkgray;
 }
